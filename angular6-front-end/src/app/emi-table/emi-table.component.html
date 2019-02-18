@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row" style="margin:16px;">
+      <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">EMI TABLE</h5>
+            <!-- <h6 class="card-subtitle mb-2 text-muted">EMI</h6> -->
+                <form [formGroup]="emiForm" (ngSubmit)="getTable()">
+                  <div class="row form-group">
+                    <input type="number" placeholder="Principle Amount" class="form-control" formControlName="pv"  [ngClass]="{ 'is-invalid': submitted && f.pv.errors }">
+                    <div *ngIf="submitted && f.pv.errors" class="invalid-feedback">
+                        <div *ngIf="f.pv.errors.required">Principle is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <input type="number" placeholder="Rate of Interest" class="form-control" formControlName="rate"  [ngClass]="{ 'is-invalid': submitted && f.rate.errors }">
+                    <div *ngIf="submitted && f.rate.errors" class="invalid-feedback">
+                        <div *ngIf="f.rate.errors.required">ROI is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <input type="number" placeholder="Term in Months" class="form-control" formControlName="nper"  [ngClass]="{ 'is-invalid': submitted && f.nper.errors }">
+                    <div *ngIf="submitted && f.nper.errors" class="invalid-feedback">
+                        <div *ngIf="f.nper.errors.required">Term is required</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-danger" type="reset">Reset</button>
+                    <button class="btn btn-info" type="submit">GET EMI</button>
+                  </div>
+                </form>
+                <h3>EMI: {{emi_amount}}</h3>
+          </div>
+        </div>
+  </div>
+  <div class="row">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Remain Principle</th>
+          <th scope="col">Interest</th>
+          <th scope="col">Paid Principle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tbl of table; index as i;">
+          <th scope="row">{{i+1}}</th>
+          <td>{{tbl.remain_pv}}</td>
+          <td>{{tbl.interest}}</td>
+          <td>{{tbl.paid_pv}}</td>
+        </tr>
+        <tr *ngIf="table.length === 0">
+          <td colspan=4 style="text-align:center;color:rgb(61, 60, 60)">No Records generated</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

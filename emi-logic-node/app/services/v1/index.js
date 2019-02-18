@@ -1,0 +1,1 @@
+export { default as WelcomeService } from './welcome_service';

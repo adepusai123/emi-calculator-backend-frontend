@@ -1,0 +1,32 @@
+<div class=" container justify-content-md-center">
+  <div class="col col-md-6 align-self-center">
+    <h3>EMI Calculator</h3>
+    <div class="row">
+      <form [formGroup]="emiForm" (ngSubmit)="calculate()">
+        <div class="row form-group">
+          <input type="number" placeholder="Principle Amount" class="form-control" formControlName="pv"  [ngClass]="{ 'is-invalid': submitted && f.pv.errors }">
+          <div *ngIf="submitted && f.pv.errors" class="invalid-feedback">
+              <div *ngIf="f.pv.errors.required">Principle is required</div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <input type="number" placeholder="Rate of Interest" class="form-control" formControlName="rate"  [ngClass]="{ 'is-invalid': submitted && f.rate.errors }">
+          <div *ngIf="submitted && f.rate.errors" class="invalid-feedback">
+              <div *ngIf="f.rate.errors.required">ROI is required</div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <input type="number" placeholder="Term in Months" class="form-control" formControlName="nper"  [ngClass]="{ 'is-invalid': submitted && f.nper.errors }">
+          <div *ngIf="submitted && f.nper.errors" class="invalid-feedback">
+              <div *ngIf="f.nper.errors.required">Term is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-danger" type="reset">Reset</button>
+          <button class="btn btn-info" type="submit">GET EMI</button>
+        </div>
+      </form>
+    </div>
+    <h3>EMI: {{emi_amount}}</h3>
+  </div>
+</div>
